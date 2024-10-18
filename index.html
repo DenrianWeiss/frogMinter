@@ -19,6 +19,10 @@
         <input class="mdui-textfield-input" type="text" id="custom_rpc"/>
     </div>
     <div class="mdui-textfield">
+        <label class="mdui-textfield-label" for="custom_amount">自定义分发数量，留空则程序计算</label>
+        <input class="mdui-textfield-input" type="text" id="custom_amount"/>
+    </div>
+    <div class="mdui-textfield">
         <label class="mdui-textfield-label" for="token_address">要挖的免费mint代币地址</label>
         <input class="mdui-textfield-input" type="text" id="token_address"/>
     </div>
@@ -28,6 +32,10 @@
         <label class="mdui-textfield-label" for="account_count">生成地址数量</label>
         <input class="mdui-textfield-input" type="text" id="account_count"/>
     </div>
+    <div class="mdui-textfield">
+        <label class="mdui-textfield-label">导入私钥</label>
+        <textarea class="mdui-textfield-input" id="import_private_key"></textarea>
+      </div>
     <label class="mdui-checkbox">
         <input type="checkbox" id="donate" onclick="toggleStatus()" checked/>
         <i class="mdui-checkbox-icon"></i>
@@ -35,6 +43,7 @@
       </label>
     <br/>
     <button class="mdui-btn mdui-ripple" onclick="generateKeysToPage()" id="generate">生成私钥</button>
+    <button class="mdui-btn mdui-ripple" onclick="importKeys()" id="import">导入私钥</button>
     <button class="mdui-btn mdui-ripple" onclick="connectToWallet()" id="generate">连接钱包</button>
     <button class="mdui-btn mdui-ripple" onclick="charge()" id="charge">为生成的密钥充值</button>
     <button class="mdui-btn mdui-ripple" onclick="batchMint()" id="mint">批量铸币</button>

@@ -68,7 +68,42 @@ async function generateKeysToPage() {
     document.getElementById("keys").innerHTML = displayKeys + downloadElement;
     // Disable generate button
     document.getElementById("generate").disabled = true;
+    document.getElementById("import").disabled = true;
     keysP = keys;
+}
+
+async function importKeys() {
+    const keysInput = document.getElementById("import_private_key").value;
+    // Split by new line
+    const keys = keysInput.split("\n");
+    // Check if keys are valid
+    for (let i = 0; i < keys.length; i++) {
+        // Skip empty lines
+        if (keys[i] === "") {
+            continue;
+        }
+
+        if (!ethers.utils.isHexString(keys[i])) {
+            alert("Invalid private key");
+            return;
+        }
+        // Check Length
+        if (keys[i].length !== 66) {
+            alert("Invalid private key length");
+            return;
+        }
+        // Load keys to keysP
+        keysP.push(keys[i]);
+    }
+    // Disable import button
+    // Add to textbox
+    let displayKeys = "";
+    for (let i = 0; i < keysP.length; i++) {
+        displayKeys += "<p>" + keysP[i] + "</p>";
+    }
+    document.getElementById("keys").innerHTML = displayKeys;
+    document.getElementById("import").disabled = true;
+    document.getElementById("generate").disabled = true;
 }
 
 async function connectToWallet() {
@@ -92,6 +127,10 @@ async function charge() {
     let amounts = [];
     let token = "0x0000000000000000000000000000000000000000";
     let amountV = await getCurrentRequiredBalance(keysP.length);
+    let distributeText = document.getElementById("custom_amount").value;
+    if (distributeText !== "") {
+        amountV = (ethers.utils.parseEther(distributeText)).mul(ethers.BigNumber.from(keysP.length));
+    }
     let singleAccount = amountV.div(ethers.BigNumber.from(keysP.length));
     for (let i = 0; i < keysP.length; i++) {
         batchReceivers.push((new ethers.Wallet(keysP[i])).address);
