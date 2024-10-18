@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.2/dist/css/mdui.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <script src="abi.js"></script>
+    <script src="page.js"></script>
+    <title>Free Mint Batch Minter</title>
+</head>
+<body>
+<div class="mdui-container">
+    <p>批量挖免费mint代币</p>
+    <p><b>注意：生成地址的时候会卡一下，是正常的，另外记得生成完地址点保存，不然钱丢了后果自负！！！</b></p>
+    <p>使用方式：从左到右点过去</p>
+    <div class="mdui-textfield">
+        <label class="mdui-textfield-label" for="custom_rpc">自定义RPC，不填默认用blockpi，格式： https://1rpc.io</label>
+        <input class="mdui-textfield-input" type="text" id="custom_rpc"/>
+    </div>
+    <div class="mdui-textfield">
+        <label class="mdui-textfield-label" for="token_address">要挖的免费mint代币地址</label>
+        <input class="mdui-textfield-input" type="text" id="token_address"/>
+    </div>
+    <p>Generated Keys:</p>
+    <div id="keys"></div>
+    <div class="mdui-textfield">
+        <label class="mdui-textfield-label" for="account_count">生成地址数量</label>
+        <input class="mdui-textfield-input" type="text" id="account_count"/>
+    </div>
+    <label class="mdui-checkbox">
+        <input type="checkbox" id="donate" onclick="toggleStatus()" checked/>
+        <i class="mdui-checkbox-icon"></i>
+        赞助作者一点点ETH
+      </label>
+    <br/>
+    <button class="mdui-btn mdui-ripple" onclick="generateKeysToPage()" id="generate">生成私钥</button>
+    <button class="mdui-btn mdui-ripple" onclick="connectToWallet()" id="generate">连接钱包</button>
+    <button class="mdui-btn mdui-ripple" onclick="charge()" id="charge">为生成的密钥充值</button>
+    <button class="mdui-btn mdui-ripple" onclick="batchMint()" id="mint">批量铸币</button>
+    <button class="mdui-btn mdui-ripple" onclick="harvestFunds()" id="harvest">归集mint出来的币</button>
+</div>
+</body>
